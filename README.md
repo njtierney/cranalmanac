@@ -8,7 +8,12 @@ The name comes from CRAN + Almanac. An Almanac, [according to Wikipedia is](http
 
 > An almanac (also spelled almanack and almanach) is an annual publication that includes information like weather forecasts, farmers' planting dates, tide tables, and other tabular data often arranged according to the calendar. Celestial figures and various statistics are found in almanacs, such as the rising and setting times of the Sun and Moon, dates of eclipses, hours of high and low tides, and religious festivals.
 
-![](https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009)
+``` r
+
+knitr::include_graphics("https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009")
+```
+
+<img src="https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009" width="50%" />
 
 Example
 -------
