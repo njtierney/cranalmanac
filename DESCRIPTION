@@ -1,0 +1,22 @@
+Package: cranalmanac
+Version: 0.0.0.9000
+Title: Access the Archives of 'CRAN'
+Description: Provides functions to scrape the metadata from the 'CRAN' archives
+Authors@R: person("Nicholas", "Tierney", email = "nicholas.tierney@gmail.com", role = c("aut", "cre"))
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Imports: magrittr,
+    rvest,
+    xml2,
+    dplyr,
+    tibble,
+    purrr,
+    janitor,
+    tidyr,
+    stringr,
+    beepr
+RoxygenNote: 6.0.1.9000
+URL: https://github.com/njtierney/cranalmanac
+BugReports: https://github.com/njtierney/cranalmanac/issues
