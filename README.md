@@ -13,10 +13,25 @@ The name comes from CRAN + Almanac. An Almanac, [according to Wikipedia is](http
 knitr::include_graphics("https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009")
 ```
 
-<img src="https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009" width="50%" />
+<img src="https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009" width="50%" style="display: block; margin: auto;" />
 
 Example
 -------
+
+You can download the data with:
+
+``` r
+cran_rxiv_pkg_parent_tbl <- cran_rxiv_pkg_parent()
+
+# get 200 packages
+cran_rxiv_pkg_child_tbl_200 <- cran_rxiv_pkg_children(cran_rxiv_pkg_parent_tbl,
+                                                      n = 200)
+```
+
+Using the data
+--------------
+
+I've prepared some data to come with the package for the moment, let's look at some example data:
 
 In this example, we are going to look at some of the example data, which includes the archived package names
 
