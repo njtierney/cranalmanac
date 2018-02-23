@@ -1,0 +1,74 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# cranalmanac
+
+The goal of cranalmanac is to provide some interesting datasets from CRAN, on the 
+current packages, when they were updated, and when packages were archived.
+
+## Example
+
+In this example, we are going to look at some of the example data, which 
+includes the archived package names
+
+Using this data, we can look at the rate at which CRAN packages are maintained
+
+```{r}
+library(cranalmanac)
+library(dplyr)
+
+cran_rxiv_pkg_a <-cran_rxiv_pkg_child_tbl_a %>%
+  select(-size) %>% 
+  mutate(type = "archived") %>%
+  bind_rows({
+    cran_current_pkg_tbl %>%
+      filter(grepl("^A|^a",pkg_name)) %>%
+      mutate(type = "cran")
+  }) %>%
+  arrange(pkg_name, desc(last_modified))
+
+```
+
+```{r}
+cran_rxiv_pkg_a
+```
+
+
+```{r}
+
+cran_rxiv_pkg_a %>%
+  group_by(pkg_name) %>%
+  summarise(n_versions = n(),
+            start_date = min(last_modified),
+            last_date = max(last_modified),
+            reign = last_date - start_date)
+
+
+
+cran_rxiv_pkg_a %>%
+  group_by(pkg_name) %>%
+  summarise(n_versions = n(),
+            start_date = min(last_modified),
+            last_date = max(last_modified),
+            reign = last_date - start_date) %>%
+  filter(reign > 365) %>%
+  mutate(update_rate = n_versions / as.numeric(reign),
+         update_rate = if_else(is.infinite(update_rate),
+                               0,
+                               update_rate)) %>%
+  arrange(desc(update_rate))
+
+```
