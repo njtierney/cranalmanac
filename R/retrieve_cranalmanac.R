@@ -33,6 +33,11 @@ cran_rxiv_pkg_name_link <- function(cran_rxiv_pkg_parent_tbl){
 #' @export
 #'
 #' @examples
+#' cran_rxiv_pkg_parent_tbl <- cran_rxiv_pkg_parent()
+#' # get 200 packages
+#' cran_rxiv_pkg_child_tbl_200 <- cran_rxiv_pkg_children(cran_rxiv_pkg_parent_tbl,
+#' n = 200)
+#'
 cran_rxiv_pkg_children <- function(cran_rxiv_pkg_parent_tbl,
                                    n = 100){
 
