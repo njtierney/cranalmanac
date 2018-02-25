@@ -26,14 +26,26 @@ cran_rxiv_pkg_child_tbl_200 <- cran_rxiv_pkg_children(cran_rxiv_pkg_parent_tbl,
 Using the data
 --------------
 
-I've prepared some data to come with the package for the moment, let's look at some example data:
+Maintainers in CRAN
+-------------------
 
-In this example, we are going to look at some of the example data, which includes the archived package names
-
-Using this data, we can look at the rate at which CRAN packages are maintained
+The data `cran_pkg_maint` contains the package maintainer and the package name
 
 ``` r
 library(cranalmanac)
+head(cran_pkg_maint)
+#>                   name                pkg
+#> 1       Daniel Gerhard              goric
+#> 2       Daniel Gerhard          mcprofile
+#> 3          Michal Knut             regsel
+#> 4           Jiaqi Tang dynetNLAResistance
+#> 5 Amanda Pratama Putra   MetaheuristicFPA
+#> 6         Zheng Sengui             NLRoot
+```
+
+We can find out some information about who maintains the most packages on CRAN:
+
+``` r
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -43,6 +55,62 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+cran_pkg_maint %>%
+  count(name) %>%
+  arrange(-n)
+#> # A tibble: 6,708 x 2
+#>    name                  n
+#>    <chr>             <int>
+#>  1 Scott Chamberlain    84
+#>  2 Dirk Eddelbuettel    61
+#>  3 Gabor Csardi         53
+#>  4 Hadley Wickham       50
+#>  5 Jeroen Ooms          45
+#>  6 Henrik Bengtsson     36
+#>  7 Thomas J. Leeper     34
+#>  8 John Muschelli       33
+#>  9 Kurt Hornik          30
+#> 10 Bob Rudis            29
+#> # ... with 6,698 more rows
+```
+
+We can also find the most common number of packages on CRAN to be maintainer.
+
+Unsurprisingly, the highest number is 1, but this drops off rapidly.
+
+``` r
+
+cran_pkg_maint %>%
+  count(name) %>%
+  count(n) %>%
+  mutate(pct = (nn / sum(nn)) * 100)
+#> # A tibble: 36 x 3
+#>        n    nn    pct
+#>    <int> <int>  <dbl>
+#>  1     1  4054 60.4  
+#>  2     2  1365 20.3  
+#>  3     3   527  7.86 
+#>  4     4   286  4.26 
+#>  5     5   147  2.19 
+#>  6     6    82  1.22 
+#>  7     7    64  0.954
+#>  8     8    47  0.701
+#>  9     9    23  0.343
+#> 10    10    18  0.268
+#> # ... with 26 more rows
+```
+
+If you maintain 7 or more CRAN packages, you're in the top 1% of maintainers.
+
+Other datasets
+--------------
+
+I've prepared some data to come with the package for the moment, which includes the archived package names
+
+Using this data, we can look at the rate at which CRAN packages are maintained
+
+``` r
+library(dplyr)
 
 cran_rxiv_pkg_a <-cran_rxiv_pkg_child_tbl_a %>%
   select(-size) %>% 

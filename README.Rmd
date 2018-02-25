@@ -23,7 +23,7 @@ The name comes from CRAN + Almanac. An Almanac, [according to Wikipedia is](http
 
 > An almanac (also spelled almanack and almanach) is an annual publication that includes information like weather forecasts, farmers' planting dates, tide tables, and other tabular data often arranged according to the calendar. Celestial figures and various statistics are found in almanacs, such as the rising and setting times of the Sun and Moon, dates of eclipses, hours of high and low tides, and religious festivals.
 
-```{r, out.width = "50%", fig.align = "center", echo = FALSE}
+```{r almanac-photo, out.width = "50%", fig.align = "center", echo = FALSE}
 
 knitr::include_graphics("https://vignette.wikia.nocookie.net/bttf/images/1/13/Almanacfront.jpg/revision/latest?cb=20070110144009")
 
@@ -33,7 +33,7 @@ knitr::include_graphics("https://vignette.wikia.nocookie.net/bttf/images/1/13/Al
 
 You can download the data with:
 
-```{r eval = FALSE}
+```{r example-usage, eval = FALSE}
 cran_rxiv_pkg_parent_tbl <- cran_rxiv_pkg_parent()
 
 # get 200 packages
@@ -43,15 +43,51 @@ cran_rxiv_pkg_child_tbl_200 <- cran_rxiv_pkg_children(cran_rxiv_pkg_parent_tbl,
 
 ## Using the data
 
-I've prepared some data to come with the package for the moment, let's look at some example data:
+## Maintainers in CRAN
 
-In this example, we are going to look at some of the example data, which 
+The data `cran_pkg_maint` contains the package maintainer and the package name
+
+```{r cran-pkg-main-load}
+library(cranalmanac)
+head(cran_pkg_maint)
+```
+
+
+We can find out some information about who maintains the most packages on CRAN:
+
+```{r cran-pkg-count}
+library(dplyr)
+cran_pkg_maint %>%
+  count(name) %>%
+  arrange(-n)
+
+```
+
+
+
+We can also find the most common number of packages on CRAN to be maintainer. 
+
+Unsurprisingly, the highest number is 1, but this drops off rapidly.
+
+```{r cran-pkg-count-count}
+
+cran_pkg_maint %>%
+  count(name) %>%
+  count(n) %>%
+  mutate(pct = (nn / sum(nn)) * 100)
+
+```
+
+If you maintain 7 or more CRAN packages, you're in the top 1% of maintainers.
+
+## Other datasets
+
+I've prepared some data to come with the package for the moment, which 
 includes the archived package names
 
 Using this data, we can look at the rate at which CRAN packages are maintained
 
-```{r}
-library(cranalmanac)
+```{r cran-create-letter-a}
 library(dplyr)
 
 cran_rxiv_pkg_a <-cran_rxiv_pkg_child_tbl_a %>%
@@ -66,12 +102,12 @@ cran_rxiv_pkg_a <-cran_rxiv_pkg_child_tbl_a %>%
 
 ```
 
-```{r}
+```{r cran-show-letter-a}
 cran_rxiv_pkg_a
 ```
 
 
-```{r}
+```{r cran-summarise-letter-a}
 
 cran_rxiv_pkg_a %>%
   group_by(pkg_name) %>%
