@@ -1,0 +1,30 @@
+---
+title: "Questions for the cranalamanac"
+author: "Nicholas Tierney"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Questions for the cranalamanac}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Some questions to consider answering:
+
+* What is the oldest R package on CRAN?
+* What was the first package on CRAN?
+* What is the oldest last updated CRAN package
+* When were they first submitted
+
+An interesting historical note on CRAN "bundles". These were packages that used to come together. For example, there was the “forecasting” bundle, which contained the forecast package and associated data packages. There was also the "VR" package - for Venables and Ripley, which came with, `MASS`, `tree`, `Nnet`.
+
+Package "bundles" were abolished in 2009 ("The great 'unbundling' of 2009").
+
+These package bundles help explain why the `forecast` package appears to have it's first apperaance on CRAN in 2009 - this is because it was in the `forecasting` bundle, and appeared in 2006.
